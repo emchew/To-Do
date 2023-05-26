@@ -1,0 +1,28 @@
+nav {
+    background-color: #FEFEFE;
+    border-bottom: 1px solid #aaa9a9;
+}
+
+.nav-brand {
+    margin-left: 1em;
+}
+
+.container {
+    display: flex;  
+}
+
+.container-column {
+    flex-direction: column;
+}
+
+.container-center-horizontal {
+    justify-content: center;
+}
+
+.container-center-vertical {
+    align-items: center;
+}
+
+#nav-container {
+    padding-left: 1em;
+}
