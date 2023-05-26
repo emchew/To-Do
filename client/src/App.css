@@ -2,6 +2,31 @@ main {
     height: calc(100vh - 80px);
 }
 
+label {
+    font-weight: bold;
+}
+
+form {
+    padding: 1em 1.5em 0em 1.5em;
+}
+
+input, textarea, select {
+    border: 1px #E9E9E9 solid;
+    border-radius: 5px;
+    font: inherit;
+    padding: 10px 10px
+}
+
+textarea {
+    resize: none;
+    width: calc(100% - 20px);
+    text-align: center;
+}
+
+form textarea {
+    margin-top: 1em;
+}
+
 nav {
     background-color: #FEFEFE;
     border-bottom: 1px solid #aaa9a9;
@@ -30,4 +55,18 @@ nav {
 
 #nav-container {
     padding-left: 1em;
+}
+
+#dashboard-buttons {
+    position: fixed;
+    bottom: 1em;
+    right: 0px;
+    justify-content: space-evenly;
+    width: 250px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 125px 2fr;
+    row-gap: 20px;
 }

@@ -1,9 +1,10 @@
 import React from 'react'
 import BaseButton from '@mui/material/Button';
 
-export default function Button({colour, sx, children, ...props}) {
+export default function Button({colour, hasMarginTop, sx, children, ...props}) {
     const colourSx = generateColour(colour);
     sx = {...sx, ...colourSx};
+    sx = hasMarginTop = {...sx, marginTop: '1.5em'};
   return (
     <BaseButton sx={sx} {...props}>
         {children}
@@ -21,7 +22,9 @@ const generateColour = (colour) => {
             color: set.colour,
             backgroundColor: set.base,
             textTransform: 'none',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            borderRadius: '10px',
+            padding: '5px 1em'
         },
         '&:hover': {
             backgroundColor: set.hover
@@ -39,5 +42,9 @@ const colourSet = {
     },
     default: {
         colour: '#AFA7A7', base: '#F9F9F9', hover: '#F9F9F9'
+    },
+    blue: {
+        colour: '#FFFFFF', base: '#5EB1FF', hover: '#2F84E8'
     }
 };
+

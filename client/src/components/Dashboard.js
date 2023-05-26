@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from './Button/Button'
+import TaskModal from './Task/TaskModal';
+import FlexContainer from '../containers/FlexContainer';
 
 export default function Dashboard() {
+  const [addTagModal, setAddTagModal] = useState(false);
+
+  const handleTagSubmit = () => {
+
+  }
   return (
     <div>
-        <Button colour="green" sx={newTaskBtnStyle}>+ New Task</Button>
-        <Button colour="default">Add a Tag</Button>
+        <FlexContainer id="dashboard-buttons">
+          <Button colour="default">Add a Tag</Button>
+          <Button colour="green" sx={newTaskBtnStyle} onClick={() => setAddTagModal(true)}>
+            + New Task
+          </Button>
+        </FlexContainer>
+        <TaskModal open={addTagModal} setOpen={setAddTagModal} submit={handleTagSubmit}/>
     </div>
   )
 }
