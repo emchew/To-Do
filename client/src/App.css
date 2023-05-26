@@ -1,6 +1,11 @@
+main {
+    height: calc(100vh - 80px);
+}
+
 nav {
     background-color: #FEFEFE;
     border-bottom: 1px solid #aaa9a9;
+    height: calc(80px - 1px)
 }
 
 .nav-brand {
