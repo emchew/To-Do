@@ -1,4 +1,5 @@
-import './App.css';
+import './css/App.css';
+import './css/task.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import Home from './pages/Home';

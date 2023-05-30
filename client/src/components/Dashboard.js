@@ -2,23 +2,37 @@ import React, { useState } from 'react'
 import Button from './Button/Button'
 import TaskModal from './Task/TaskModal';
 import FlexContainer from '../containers/FlexContainer';
+import Tasks from './Task/Tasks';
 
 export default function Dashboard() {
   const [addTagModal, setAddTagModal] = useState(false);
+  const [tasks, setTasks] = useState([]);
+  const [index, setIndex] = useState(0);
 
-  const handleTagSubmit = () => {
-
+  const handleTagSubmit = (taskId, taskName) => {
+    const copy = [...tasks];
+    if (taskName)
+    copy.push({
+        taskId: index,
+        taskName,
+        due: '2-5pm',
+        tags: [],
+    });
+    setIndex(i => i + 1);
+    setTasks(copy);
   }
   return (
-    <div>
-        <FlexContainer id="dashboard-buttons">
-          <Button colour="default">Add a Tag</Button>
-          <Button colour="green" sx={newTaskBtnStyle} onClick={() => setAddTagModal(true)}>
-            + New Task
-          </Button>
-        </FlexContainer>
-        <TaskModal open={addTagModal} setOpen={setAddTagModal} submit={handleTagSubmit}/>
-    </div>
+    <FlexContainer centreHorizontal={true} id="dashboard-container">
+      <Tasks tasks={tasks} submit={handleTagSubmit}/>
+      <FlexContainer id="dashboard-buttons">
+        <Button colour="default">Add a Tag</Button>
+        <Button colour="green" sx={newTaskBtnStyle} onClick={() => setAddTagModal(true)}>
+          + New Task
+        </Button>
+      </FlexContainer>
+      <TaskModal open={addTagModal} setOpen={setAddTagModal} submit={handleTagSubmit}/>
+    </FlexContainer>
+
   )
 }
 

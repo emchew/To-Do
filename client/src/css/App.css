@@ -6,15 +6,19 @@ label {
     font-weight: bold;
 }
 
-form {
-    padding: 1em 1.5em 0em 1.5em;
+input, textarea {
+    padding: 10px 10px;
+    border-radius: 5px;
 }
 
 input, textarea, select {
     border: 1px #E9E9E9 solid;
-    border-radius: 5px;
     font: inherit;
-    padding: 10px 10px
+}
+
+select {
+    padding: 5px 10px;
+    border-radius: 20px;
 }
 
 textarea {
@@ -56,6 +60,13 @@ nav {
 #nav-container {
     padding-left: 1em;
 }
+
+
+#dashboard-container {
+   height: fit-content;
+   padding: 1em 0em;
+}
+
 
 #dashboard-buttons {
     position: fixed;
