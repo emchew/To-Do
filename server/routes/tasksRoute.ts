@@ -1,5 +1,5 @@
 import express from "express";
-import { tasksList } from "../src/faketask";
+import { tasksList } from "../src/task";
 
 const router = express.Router();
 

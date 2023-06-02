@@ -1,5 +1,5 @@
 import express from "express";
-import { tagsList } from "../src/faketag";
+import { tagsList } from "../src/tag";
 
 const router = express.Router();
 
