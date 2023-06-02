@@ -1,13 +1,13 @@
 import React from 'react'
 import { styled } from '@mui/material';
 
-export default function Select({name, id, options, colour, value, setValue, ...props}) {
+export default function Select({ id, options, colour, value, setValue, ...props}) {
     const style ={
         backgroundColor: options[value].colour,
         color: colour
     }
     return (
-        <SelectStyle id={id} name={name} {...props}
+        <SelectStyle id={id} {...props}
             style={style}
             onChange={(e) => setValue(e.target.value)}
         >

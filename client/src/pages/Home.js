@@ -7,17 +7,8 @@ import FlexContainer from '../containers/FlexContainer'
 import TaskModal from '../components/task/TaskModal';
 export default function Home() {
   const [addTagModal, setAddTagModal] = useState(false);
-  const handleTagSubmit = (taskId, taskName) => {
-    // const copy = [...tasks];
-    // if (taskName)
-    // copy.push({
-    //     taskId: index,
-    //     taskName,
-    //     due: '2-5pm',
-    //     tags: [],
-    // });
-    // setIndex(i => i + 1);
-    // setTasks(copy);
+  const handleTagSubmit = (tagId, colour, textColour) => {
+    console.log(tagId, colour, textColour);
   }
   return (
     <main>
@@ -28,7 +19,7 @@ export default function Home() {
                 + New Task
             </Button>
         </FlexContainer>
-        <TaskModal open={addTagModal} setOpen={setAddTagModal} submit={handleTagSubmit}/>
+        <TaskModal open={addTagModal} setOpen={setAddTagModal} tagSubmit={handleTagSubmit}/>
     </main>
   )
 }
