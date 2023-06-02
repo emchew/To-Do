@@ -10,6 +10,7 @@ export default function Select({ id, options, colour, value, setValue, ...props}
         <SelectStyle id={id} {...props}
             style={style}
             onChange={(e) => setValue(e.target.value)}
+            value={value}
         >
             {options && options.map((o, key) => {
                 return <option key={key} value={key}>{o.name}</option>

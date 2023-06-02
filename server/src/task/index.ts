@@ -36,7 +36,7 @@ export function taskEdit(taskId: String, taskName: String, status: String, tags:
     } else if (!checkTaskStatus(status)) {
         throw Error(`Invalid status ${status}`);
     }
-
+    
     editTask(taskIndex, taskName, status, tags, description);
 }
 
