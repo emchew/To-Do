@@ -1,34 +1,38 @@
-import { Tag } from "../tag/tag"
 import { getData, setData } from '../data';
 
-type Task = {
+export type Task = {
     taskId: String,
     taskName: String,
     status: String,
-    tags: Tag[],
+    tags: String[],
     description: String
 }
 
-
-/** Create a task
- * 
- * @param { String } taskId 
- * @param { String } taskName 
- * @param { Tag[] }tags 
- * @param { String } status 
- * @param { String } description 
- */
-function createTask(taskId: String, taskName: String, tags: Tag[], status: String, description) {
+export function createTask(taskId: String, taskName: String, tags: String[], status: String, description) {
     let data = getData();
-    let task: Task = {
-        taskId: taskId,
-        taskName: taskName,
-        status: status,
-        tags: tags,
-        description: description
-    }
+    let task = { taskId, taskName, tags, status, description}
     data.tasks.push(task);
     setData(data);
 }
 
-export { Task, createTask }
+/** Edit a task
+ *  Assumes the index is within range of the array of tasks
+ */
+export function editTask(index: number, taskName: String, status: String, tags: String[], description) {
+    let data = getData();
+    let task = data.tasks[index];
+    task = {
+        ...task,
+        taskName,
+        tags,
+        status,
+        description
+    };
+    data.tasks[index] = task;
+    setData(data);
+}
+
+export function getTaskIndex(taskId: String): number {
+    let tasks = getData().tasks;
+    return tasks.findIndex(task => task.taskId === taskId);
+}
