@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors';
 import taskRoute from './routes/taskRoute';
 import tasksRoute from './routes/tasksRoute';
 import tagRoute from './routes/tagRoute';
@@ -6,6 +7,8 @@ import tagsRoute from './routes/tagsRoute';
 
 const app = express();
 const PORT = 3001;
+
+app.use(cors());
 
 app.get("/", (req, res) => {
     console.log("Backend running at root route");
