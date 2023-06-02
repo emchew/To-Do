@@ -18,6 +18,27 @@ export function createTag(tagId: String, tagName: String, colour: String, textCo
     setData(data);
 }
 
+/** Edit a tag
+ * Assumes tagIndex is within range of the tag array
+ */
+export function editTag(tagIndex: number, tagName: String, colour: String, textColour: String) {
+    let data = getData();
+    let tag = data.tags[tagIndex];
+    tag = {...tag, tagName, colour, textColour};
+    data.tags[tagIndex] = tag;
+    setData(data);
+}
+
+
+/** Delete a tag with a specific tagIndex
+ * Assumes tagIndex is within range of the tag array
+**/
+export function deleteTag(tagIndex: number) {
+    let data = getData();
+    data.tags.splice(tagIndex, 1);
+    setData(data);
+}
+
 /** Check if all tags in a list of tags exist
  *  
  * @param tags 
@@ -25,21 +46,15 @@ export function createTag(tagId: String, tagName: String, colour: String, textCo
  */
 export function checkValidTags(tags: String[]): boolean {
     for (let tag of tags) {
-        if (!checkValidTagId(tag)) {
+        if (getTagIndex(tag) === -1) {
             return false;
         }
     }
     return true;
 }
 
-function checkValidTagId(tagId: String): boolean {
-    let tags: Tag[] = getData().tags;
-    for (let tag of tags) {
-        if (tag.tagId === tagId) {
-            return true;
-        }
-    }
-    return false;
+export function getTagIndex(tagId: String) : number {
+    return getData().tags.findIndex(tag => tag.tagId === tagId);
 }
 
 /** Check if a tagName exists in the database
