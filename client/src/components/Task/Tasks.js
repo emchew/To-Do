@@ -3,7 +3,7 @@ import Task from './Task';
 import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-export default function Tasks({tasks, submit}) {
+export default function Tasks({tasks, submit, handle}) {
   const [newTask, setNewTask] = useState('');
   const handleTaskSubmit = () => {
     if (newTask === '') {

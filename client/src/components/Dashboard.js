@@ -21,6 +21,16 @@ export default function Dashboard() {
     setIndex(i => i + 1);
     setTasks(copy);
   }
+
+  // const handleTaskAdd = (taskId, taskName, tags) => {
+  //   const copy = [...tasks];
+  //   let index = copy.findIndex(task => task.taskId === taskId);
+  //   if (index !== -1) {
+  //     copy[index] = {...copy[index], taskName, tags};
+  //   }
+  //   setTasks(copy);
+  // }
+
   return (
     <FlexContainer centreHorizontal={true} id="dashboard-container">
       <Tasks tasks={tasks} submit={handleTagSubmit}/>

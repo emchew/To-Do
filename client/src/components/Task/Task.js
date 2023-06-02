@@ -5,7 +5,7 @@ import Tags from '../Tag/Tags';
 
 // import '../../css/task.css';
 
-export default function Task({task}) {
+export default function Task({task, submitTag}) {
   const [status, setStatus] = useState(0);
 
   return (
@@ -25,7 +25,7 @@ export default function Task({task}) {
         {task.taskName}
       </div>
       
-      <Tags tags={task.tags}/>
+      <Tags tags={task.tags} submit={submitTag}/>
       {/* <div className="tags-container">
         {props.tags.map((tag) => 
           <Tag key={tag.tagId} tagName={tag.tagName} colour={tag.colour} />
