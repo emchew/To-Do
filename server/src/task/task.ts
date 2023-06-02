@@ -1,34 +1,16 @@
-import { Tag } from "../tag/tag"
 import { getData, setData } from '../data';
 
-type Task = {
+export type Task = {
     taskId: String,
     taskName: String,
     status: String,
-    tags: Tag[],
+    tags: String[],
     description: String
 }
 
-
-/** Create a task
- * 
- * @param { String } taskId 
- * @param { String } taskName 
- * @param { Tag[] }tags 
- * @param { String } status 
- * @param { String } description 
- */
-function createTask(taskId: String, taskName: String, tags: Tag[], status: String, description) {
+export function createTask(taskId: String, taskName: String, tags: String[], status: String, description) {
     let data = getData();
-    let task: Task = {
-        taskId: taskId,
-        taskName: taskName,
-        status: status,
-        tags: tags,
-        description: description
-    }
+    let task = { taskId, taskName, tags, status, description}
     data.tasks.push(task);
     setData(data);
 }
-
-export { Task, createTask }

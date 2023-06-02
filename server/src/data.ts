@@ -4,13 +4,11 @@ import { Task } from "./task/task";
 type Data = {
     tasks: Task[],
     tags: Tag[],
-    //status: String[]
 }
 
 let data: Data = {
     tasks: [],
     tags: [],
-    //status: 
 }
 
 function getData(): Data {

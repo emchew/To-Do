@@ -1,14 +1,11 @@
 import { getData } from "../data";
-import { Task } from "../task/task";
+import { Task } from "./task";
 
 /** List tasks from most recent first
  * 
  * @returns { Task[] }
  */
-
-function listTasks() {
+export function listTasks() {
     let tasks: Task[] = getData().tasks;
     return tasks.reverse();
 }
-
-export { listTasks }
