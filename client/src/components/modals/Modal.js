@@ -51,8 +51,7 @@ const roundedSx = {
     borderRadius: '20px'
 }
 
-export default function Modal(props) {
-    const { id, open, setOpen, hasTitle, title, hasFooter, footer, children, dividers, isRounded } = props;
+export default function Modal({id, open, setOpen, hasTitle, title, hasFooter, footer, children, dividers, isRounded}) {
     let sx = {
         '& h2': {
             textAlign: 'center',

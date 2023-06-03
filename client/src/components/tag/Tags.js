@@ -23,7 +23,7 @@ export default function Tags({ task, taskChange, setReload, allTags }) {
     }
   }
   return (
-    <FlexContainer id="tags-container">
+    <FlexContainer justifyContent="end" alignItems="center" flexGrow="1">
       {task.tags.length > 0 && task.tags.map(tag => {
           return <Tag key={tag} tagId={tag} tagDelete={handleTagDelete} setReload={setReload}/>
       })}

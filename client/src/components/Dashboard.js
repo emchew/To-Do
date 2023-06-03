@@ -32,8 +32,13 @@ export default function Dashboard({reload, setReload, taskEdit}) {
     }
 
     return (
-        <FlexContainer centreHorizontal={true} id="dashboard-container">
+        <FlexContainer justifyContent="center" sx={dashboardContainerStyle}>
             <Tasks tasks={tasks} taskEdit={taskEdit} allTags={tags} updateTags={updateTags} setReload={setReload}/>
         </FlexContainer>
     )
+}
+
+const dashboardContainerStyle = {
+    height: 'fit-content',
+    padding: '1em 0em'
 }

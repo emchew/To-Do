@@ -5,7 +5,7 @@ import { statusOptions } from '../utility/statusTypes';
 import FlexContainer from '../../containers/FlexContainer';
 import StatusSelect from '../status/StatusSelect';
 import Tags from '../tag/Tags';
-export default function Task({task, taskChange, updateTags, allTags, setReload}) {
+export default function Task({task, taskChange, taskClick, allTags, setReload}) {
   const [status, setStatus] = useState(0);
 
   useEffect(() => {
@@ -20,13 +20,12 @@ export default function Task({task, taskChange, updateTags, allTags, setReload})
   }
 
   return (
-    <FlexContainer id="task-container">
+    <FlexContainer id="task-container" onClick={() => taskClick(task)}>
         <StatusSelect value={status} setValue={handleStatusChange}/>
         <BlockText fontWeight={'bold'}>2pm-5pm</BlockText>
         <BlockText sx={{width: '25vw'}}>{task.taskName}</BlockText>
 
         <Tags task={task} allTags={allTags} setReload={setReload} taskChange={taskChange}/>
-      
     </FlexContainer>
   )
 }

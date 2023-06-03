@@ -1,13 +1,21 @@
 import React from 'react'
+import { styled } from '@mui/material';
 
-export default function FlexContainer({className, centreHorizontal, centreVertical, flexDirection, children, ...props}) {
-    className = "container"
-    className = centreHorizontal ? `${className} container-center-horizontal` : className;
-    className = centreVertical ? `${className} container-center-vertical` : className;
-    className = flexDirection === 'column' ? `${className} container-column` : className;
+export default function FlexContainer({ children, sx, ...props }) {
+    console.log(sx);
     return (
-        <div className={className} {...props}>
+        <ContainerStyle
+            sx={sx}
+            {...props}>
             {children}
-        </div>
+        </ContainerStyle>
     )
 }
+
+const ContainerStyle = styled("div")(({flexDirection, justifyContent, alignItems, flexGrow }) => ({
+   display: 'flex',
+   flexDirection,
+   justifyContent,
+   alignItems,
+   flexGrow
+}))

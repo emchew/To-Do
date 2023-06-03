@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { Icon, styled } from '@mui/material';
+import { styled } from '@mui/material';
+import Popover from '@mui/material/Popover';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import EditTagForm from './EditTagForm';
 
 const defaultColours = {
     colour: '#607D8B',
@@ -10,6 +12,8 @@ const defaultColours = {
 }
 export default function Tag({tagId, setReload, tagDelete}) {
     const [tag, setTag] = useState({});
+    const [anchor, setAnchor] = useState(null);
+    
     const config = {'Content-Type': 'application/json'};
 
     useEffect(() => {
@@ -28,12 +32,24 @@ export default function Tag({tagId, setReload, tagDelete}) {
     }
 
     return (
-        <TagStyle tag={tag}>
-            {tag.tagName}
-            <CloseStyle tag={tag} onClick={handleDelete}>
-                <CloseIcon/>
-            </CloseStyle>
-        </TagStyle>
+        <>
+            <TagStyle tag={tag} onClick={e => setAnchor(e.currentTarget)}>
+                {tag.tagName}
+                <CloseStyle tag={tag} onClick={handleDelete}>
+                    <CloseIcon/>
+                </CloseStyle>
+            </TagStyle>
+            <Popover open={anchor != null}
+                onClose={() => setAnchor(null)}
+                anchorEl={anchor}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+            >
+                <EditTagForm tag={tag}/>
+            </Popover>
+        </>
     )
 }
 const TagStyle = styled('div')(({tag}) => ({

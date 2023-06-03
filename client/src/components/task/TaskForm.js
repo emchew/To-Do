@@ -74,7 +74,7 @@ export default function TaskForm({ submit}) {
                 rows={3}
                 hasMarginTop={true}
             />
-            <FlexContainer centreHorizontal={true}>
+            <FlexContainer justifyContent="center">
                 <Button type="submit" hasMarginTop={true} colour="blue"
                     sx={{width: 100, borderRadius: '10px'}}
                     onClick={handleSubmit}
