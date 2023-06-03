@@ -7,7 +7,6 @@ import AddIcon from '@mui/icons-material/AddBox';
 
 export default function Tags({ task, taskChange, setReload, allTags }) {
   const [tag, setTag] = useState(0);
-  const [reloadTags, setReloadTags] = useState(false);
 
   const handleTagChange = () => {
     let newTags = [...task.tags, allTags[tag].tagId];
@@ -31,8 +30,6 @@ export default function Tags({ task, taskChange, setReload, allTags }) {
             <Tag key={tag} tagId={tag}
               tagDelete={handleTagDelete}
               setReload={setReload}
-              reloadTags={reloadTags}
-              setReloadTags={setReloadTags}
             />
           )
       })}

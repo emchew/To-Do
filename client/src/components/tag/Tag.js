@@ -10,7 +10,7 @@ const defaultColours = {
     colour: '#607D8B',
     textColour: '#FFFFFF'
 }
-export default function Tag({tagId, setReload, reloadTags, setReloadTags, tagDelete}) {
+export default function Tag({tagId, setReload, tagDelete}) {
     const [tag, setTag] = useState({});
     const { ref, isComponentVisible, setIsComponentVisible } = useVisible(false);
     const config = {'Content-Type': 'application/json'};
@@ -21,11 +21,9 @@ export default function Tag({tagId, setReload, reloadTags, setReloadTags, tagDel
     }, [tagId]);
 
     useEffect(() => {
-        if (reloadTags) {
-            updateTag();
-            setReloadTags(false);
-        }
-    }, [reloadTags]);
+        updateTag();
+        
+    });
     
     const updateTag = () => {
         axios.get(`/tag/details/${tagId}`, config)
@@ -42,7 +40,6 @@ export default function Tag({tagId, setReload, reloadTags, setReloadTags, tagDel
         const body = {tagId, ...tag, colour, textColour};
         axios.put(`/tag/edit/`, body, config)
             .then(res => res.data)
-            .then(() => setReloadTags(true))
             .then(() => setReload(true))
     }
 
