@@ -1,5 +1,5 @@
 import { getData } from "../data";
-import { createTag, editTag, deleteTag, checkValidTagName, getTagIndex } from "./tag";
+import { createTag, editTag, deleteTag, checkValidTagName, getTagIndex, getTag } from "./tag";
 import { v4 as uuidv4 } from "uuid";
 import { checkHexColour } from "../utility";
 import { listTags } from "../tag/tags";
@@ -22,6 +22,19 @@ export function tagCreate(tagName: String, colour: String, textColour: String) {
     let tagId = uuidv4();
     createTag(tagId, tagName, colour, textColour);
     return { tagId };
+}
+
+/** Creates a custom tag with a chosen hexcode colour.
+ *  @param { String } tagName
+ *  @param { String } colour
+ *  @returns { tagId } 
+ */
+export function tagDetails(tagId: String) {
+    let index = getTagIndex(tagId);
+    if (index === -1) {
+        throw Error("TagId is invalid");
+    } 
+    return { tag: getTag(index) }
 }
 
 /** Creates a custom tag with a chosen hexcode colour.

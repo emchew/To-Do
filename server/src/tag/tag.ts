@@ -18,6 +18,20 @@ export function createTag(tagId: String, tagName: String, colour: String, textCo
     setData(data);
 }
 
+/** Get the details about a tag
+ * Assumes tagIndex is within range of the tag array
+ */
+export function getTag(tagIndex: number) {
+    let data = getData();
+    let tag = data.tags[tagIndex];
+    return {
+        tagName: tag.tagName,
+        colour: tag.colour,
+        textColour: tag.textColour
+    }
+}
+
+
 /** Edit a tag
  * Assumes tagIndex is within range of the tag array
  */
