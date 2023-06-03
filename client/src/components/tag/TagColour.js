@@ -1,8 +1,12 @@
 import React from 'react'
 import { TwitterPicker as ColourPicker } from 'react-color';
 
-export default function TagColour({change}) {
+const colours = [
+  '#FD4437', '#FFC979', '#FCB900', '#FFEB3B', '#7BDCB5', '#00D084', '#18AA64',
+  '#8ED1FC', '#74B4FF', '#2196F3', '#ABB8C3', '#FFADCB', '#DCBAFF', '#9900EF'
+];
 
+export default function TagColour({change}) {
   const handleChange = (colour) => {
     change(colour.hex, generateTextColour(colour.rgb.r, colour.rgb.g, colour.rgb.b));
   }
@@ -15,6 +19,6 @@ export default function TagColour({change}) {
     }
   }
   return (
-    <ColourPicker triangle="top-right" onChange={handleChange}/>
+    <ColourPicker triangle="top-right" onChange={handleChange} colors={colours}/>
   )
 }

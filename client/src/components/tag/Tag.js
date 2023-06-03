@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import useVisible from '../../hooks/useVisible';
 import axios from 'axios';
 import { styled } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import EditTagForm from './EditTagForm';
+import FlexContainer from '../../containers/FlexContainer';
 
 const defaultColours = {
     colour: '#607D8B',
@@ -12,9 +14,9 @@ const defaultColours = {
 }
 export default function Tag({tagId, setReload, tagDelete}) {
     const [tag, setTag] = useState({});
+    const [editTagName, setEditTagName] = useState('');
     const { ref, isComponentVisible, setIsComponentVisible } = useVisible(false);
     const config = {'Content-Type': 'application/json'};
-    // const [toggleTagModal, setToggleTagModal] = useState(false);
 
     useEffect(() => {
         updateTag();
@@ -36,11 +38,18 @@ export default function Tag({tagId, setReload, tagDelete}) {
         setReload(true);
     }
 
-    const handleColourChange = (colour, textColour) => {
-        const body = {tagId, ...tag, colour, textColour};
+    const editTag = (body) => {
         axios.put(`/tag/edit/`, body, config)
             .then(res => res.data)
             .then(() => setReload(true))
+    }
+
+    const handleColourChange = (colour, textColour) => {
+        editTag({tagId, ...tag, colour, textColour});
+    }
+
+    const handleNameChange = () => {
+        editTag({tagId, ...tag, tagName: editTagName});
     }
 
     const handleClick = (e) => {
@@ -49,31 +58,65 @@ export default function Tag({tagId, setReload, tagDelete}) {
     }
 
     return (
-        <>
-            <TagStyle tag={tag} onClick={handleClick} Mouse>
-                {tag.tagName}
-                <CloseStyle tag={tag} onClick={handleDelete}>
-                    <CloseIcon/>
-                </CloseStyle>
-                
-                {isComponentVisible && (
-                    <div ref={ref}>
-                        <EditTagForm tag={tag} colourChange={handleColourChange}/>
-                    </div>
-                )}
-            </TagStyle>
-        </>
+        <WrapperContainer>
+            {!isComponentVisible
+                ? (
+                    <TagStyle justifyContent="space-evenly" tag={tag} onClick={handleClick} Mouse>
+                        <Typography>
+                            {tag.tagName}
+                        </Typography>
+                        <CloseStyle tag={tag} onClick={handleDelete}>
+                            <CloseIcon/>
+                        </CloseStyle>
+                        
+                    </TagStyle>
+                )
+                : ( <>
+                        <div ref={ref}>
+                            <TagInputStyle tag={tag}
+                                placeholder={tag.tagName}
+                                value={editTagName}
+                                onChange={(e) => setEditTagName(e.target.value)}
+                                onBlur={handleNameChange}
+                            />
+                            <EditTagForm tag={tag} colourChange={handleColourChange}/>
+                        </div>
+                    </>
+                )
+            }
+        </WrapperContainer>
     )
 }
-const TagStyle = styled('div')(({tag}) => ({
+
+const WrapperContainer = styled('div')({
+    position: 'relative',
+})
+const TagStyle = styled(FlexContainer)(({tag}) => ({
     color: tag.textColour ? tag.textColour : defaultColours.textColour,
     backgroundColor: tag.colour ? tag.colour : defaultColours.colour,
     padding: '0.3em 1em',
     marginRight: '10px',
     borderRadius: '40px',
-    minWidth: '80px',
+    minWidth: '120px',
+    maxWidth: '150px',
     textAlign: 'center',
-    position: 'relative',
+}));
+
+const TagInputStyle = styled('input')(({tag}) => ({
+    '&': {
+        color: tag.textColour ? tag.textColour : defaultColours.textColour,
+        backgroundColor: tag.colour ? tag.colour : defaultColours.colour,
+        padding: '0.3em 1em',
+        marginRight: '10px',
+        borderRadius: '40px',
+        maxWidth: '120px',
+        textAlign: 'center',
+        fontSize: 'inherit',
+    }, 
+    '&::placeholder': {
+        color: tag.textColour ? tag.textColour : defaultColours.textColour,
+        opacity: 0.5
+    }
 }));
 
 const CloseStyle = styled(IconButton)(({tag}) => ({
@@ -84,7 +127,7 @@ const CloseStyle = styled(IconButton)(({tag}) => ({
     '& svg': {
         width: '15px',
         height: '15px',
-        color: tag.textColour ? tag.textColour : defaultColours.textColour
+        color: tag.textColour ? tag.textColour : defaultColours.textColour,
     }
 }))
 
