@@ -25,7 +25,6 @@ export default function Home() {
   }
 
   const handleTaskEdit = (taskId, taskName, status, tags, description) => {
-    console.log(status);
     if (taskName === '') {
       alert('Task name cannot be an empty string ')
       return false;
@@ -33,6 +32,7 @@ export default function Home() {
     const body = { taskId, taskName, status, tags, description };
     axios.put(`/task/edit`, body, config)
       .then(res => res.data)
+      .then(() => setReload(true));
     return false;
   }
   return (

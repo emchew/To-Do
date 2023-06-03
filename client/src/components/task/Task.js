@@ -1,22 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { styled } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import { statusOptions } from '../utility/statusTypes';
 import FlexContainer from '../../containers/FlexContainer';
 import StatusSelect from '../status/StatusSelect';
-export default function Task({task, change}) {
-  const [status, setStatus] = useState(() => {
-      return statusOptions.findIndex(o => o.value === task.status);
-  });
+import Tags from '../tag/Tags';
+export default function Task({task, taskChange, updateTags, allTags, setReload}) {
+  const [status, setStatus] = useState(0);
+
+  useEffect(() => {
+    if (task != null) {
+      setStatus(statusOptions.findIndex(o => o.value === task.status));
+    }
+  }, [task])
 
   const handleStatusChange = (value) => {
     setStatus(value);
-    change(task.taskId, task.taskName, statusOptions[value].value, task.tags, task.description);
+    taskChange(task.taskId, task.taskName, statusOptions[value].value, task.tags, task.description);
   }
 
   return (
     <FlexContainer id="task-container">
         <StatusSelect value={status} setValue={handleStatusChange}/>
-        <b>2pm-5pm</b>
-        {task.taskName}
+        <BlockText fontWeight={'bold'}>2pm-5pm</BlockText>
+        <BlockText sx={{width: '25vw'}}>{task.taskName}</BlockText>
+
+        <Tags task={task} allTags={allTags} setReload={setReload} taskChange={taskChange}/>
+      
     </FlexContainer>
   )
 }
+
+const BlockText = styled(Typography)({
+  marginLeft: '20px'
+})

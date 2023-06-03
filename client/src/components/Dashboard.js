@@ -6,13 +6,16 @@ import Tasks from './task/Tasks';
 
 export default function Dashboard({reload, setReload, taskEdit}) {
     const [tasks, setTasks] = useState([]);
+    const [tags, setTags] = useState([]);
     const config = {'Content-Type': 'application/json'};
     useEffect(() => {
         updateTasks();
+        updateTags();
     }, []);
     useEffect(() => {
        if (reload) {
             updateTasks();
+            updateTags();
             setReload(false);
        }
     }, [reload]);
@@ -22,10 +25,15 @@ export default function Dashboard({reload, setReload, taskEdit}) {
             .then(res => res.data)
             .then(data => setTasks(data.tasks));
     }
+    const updateTags = () => {
+        axios.get(`/tags/list`, config)
+            .then(res => res.data)
+            .then(data => setTags(data.tags));
+    }
 
     return (
         <FlexContainer centreHorizontal={true} id="dashboard-container">
-            <Tasks tasks={tasks} taskEdit={taskEdit}/>
+            <Tasks tasks={tasks} taskEdit={taskEdit} allTags={tags} updateTags={updateTags} setReload={setReload}/>
         </FlexContainer>
     )
 }

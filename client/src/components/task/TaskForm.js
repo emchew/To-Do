@@ -29,7 +29,6 @@ export default function TaskForm({ submit}) {
             .then(data => setTags(data.tags));
     }
     const handleSubmit = () => {
-        console.log("attempt to submit");
         if (submit(name, statusOptions[status].value, tags, description)) resetForm();
     }
 

@@ -64,3 +64,9 @@ nav {
     justify-content: space-evenly;
     width: 250px;
 }
+
+#tags-container {
+    flex-grow: 1;
+    justify-content: end;
+    align-items: center;
+}
