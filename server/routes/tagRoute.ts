@@ -8,8 +8,8 @@ router.post("/create", (req, res) => {
     return res.json(tagCreate(tagName, colour, textColour));
 });
 
-router.get("/details", (req, res) => {
-    const { tagId } = req.query.params;
+router.get("/details/:tagId", (req, res) => {
+    const { tagId } = req.params;
     return res.json(tagDetails(tagId));
 });
 
@@ -18,8 +18,8 @@ router.put("/edit", (req, res) => {
     return res.json(tagEdit(tagId, tagName, colour, textColour));
 });
 
-router.delete("/delete", (req, res) => {
-    const { tagId } = req.query.params;
+router.delete("/delete/:tagId", (req, res) => {
+    const { tagId } = req.params;
     return res.json(tagDelete(tagId));
 });
 
