@@ -6,6 +6,6 @@ import { Task } from "./task";
  * @returns { Task[] }
  */
 export function listTasks() {
-    let tasks: Task[] = getData().tasks;
+    let tasks: Task[] = [...getData().tasks];
     return tasks.reverse();
 }

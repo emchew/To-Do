@@ -19,11 +19,12 @@ export default function Dashboard({reload, setReload, taskEdit}) {
             setReload(false);
        }
     }, [reload]);
-
     const updateTasks = () => {
         axios.get(`/tasks/list`, config)
             .then(res => res.data)
-            .then(data => setTasks(data.tasks));
+            .then(data => {
+                setTasks(data.tasks)
+            });
     }
     const updateTags = () => {
         axios.get(`/tags/list`, config)

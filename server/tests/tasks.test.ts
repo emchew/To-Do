@@ -105,5 +105,32 @@ describe("Testing tasks/list", () => {
                 ]
             })
         });
+
+        test("2 tasks, successive calls, returns in same order", () => {
+            const { tagId } = tagCreate(tag.tagName, tag.colour, tag.textColour);
+            const { taskId } = taskCreate(task.taskName, task.status, [tagId], task.description);
+            const  taskId2 = taskCreate(task2.taskName, task2.status, [tagId], task2.description).taskId;
+            for (let i = 0; i < 10; i++) {
+                console.log(i);
+                expect(tasksList()).toStrictEqual({
+                    tasks: [
+                        {
+                            taskId: taskId2,
+                            taskName: task2.taskName,
+                            status: task2.status, 
+                            tags: [tagId], 
+                            description: task2.description,
+                        },
+                        {
+                            taskId,
+                            taskName: task.taskName,
+                            status: task.status, 
+                            tags: [tagId], 
+                            description: task.description,
+                        }
+                    ]
+                })
+            }
+        });
     }) 
 });
