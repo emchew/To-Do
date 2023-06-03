@@ -12,7 +12,7 @@ const defaultColours = {
     colour: '#607D8B',
     textColour: '#FFFFFF'
 }
-export default function Tag({tagId, setReload, tagDelete}) {
+export default function Tag({tagId, setReload, tagDelete, allowDelete}) {
     const [tag, setTag] = useState({});
     const [editTagName, setEditTagName] = useState('');
     const { ref, isComponentVisible, setIsComponentVisible } = useVisible(false);
@@ -24,13 +24,14 @@ export default function Tag({tagId, setReload, tagDelete}) {
 
     useEffect(() => {
         updateTag();
-        
     });
     
     const updateTag = () => {
         axios.get(`/tag/details/${tagId}`, config)
             .then(res => res.data)
-            .then((data) => setTag(data.tag));
+            .then((data) => setTag(data.tag))
+            .catch(error => console.log("Crashed"));
+        
     }
 
     const handleDelete = () => {
@@ -65,9 +66,11 @@ export default function Tag({tagId, setReload, tagDelete}) {
                         <Typography>
                             {tag.tagName}
                         </Typography>
-                        <CloseStyle tag={tag} onClick={handleDelete}>
-                            <CloseIcon/>
-                        </CloseStyle>
+                        {allowDelete != false && 
+                            <CloseStyle tag={tag} onClick={handleDelete}>
+                                <CloseIcon/>
+                            </CloseStyle>
+                        }
                         
                     </TagStyle>
                 )

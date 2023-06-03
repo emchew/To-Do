@@ -49,7 +49,11 @@ export function editTag(tagIndex: number, tagName: String, colour: String, textC
 **/
 export function deleteTag(tagIndex: number) {
     let data = getData();
+    let tag = data.tags[tagIndex];
     data.tags.splice(tagIndex, 1);
+    for (let task of data.tasks) {
+        task.tags = task.tags.filter(t => t !== tag.tagId);
+    }
     setData(data);
 }
 
