@@ -19,5 +19,6 @@ export default function EditTagForm({tag, colourChange}) {
 const EditTagContainer = styled(FlexContainer)({
   position: 'absolute',
   padding: '1em',
-  right: '10px'
+  right: '10px',
+  zIndex: 1
 });
