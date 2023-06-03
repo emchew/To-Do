@@ -63,7 +63,7 @@ export default function Tag({tagId, setReload, tagDelete, allowDelete}) {
             {!isComponentVisible
                 ? (
                     <TagStyle justifyContent="space-evenly" tag={tag} onClick={handleClick} Mouse>
-                        <Typography>
+                        <Typography noWrap={true}>
                             {tag.tagName}
                         </Typography>
                         {allowDelete != false && 
