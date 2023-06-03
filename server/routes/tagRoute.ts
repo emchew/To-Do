@@ -9,7 +9,7 @@ router.post("/create", (req, res) => {
 });
 
 router.get("/details", (req, res) => {
-    const { tagId } = req.body;
+    const { tagId } = req.query.params;
     return res.json(tagDetails(tagId));
 });
 
