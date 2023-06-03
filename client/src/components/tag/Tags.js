@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/AddBox';
 
 export default function Tags({ task, taskChange, setReload, allTags }) {
   const [tag, setTag] = useState(0);
-
+  const selectTags = allTags.filter(filterTag => task.tags.findIndex(t => t === filterTag.tagId) === -1);
   const handleTagChange = () => {
     let newTags = [...task.tags, allTags[tag].tagId];
     newTags = [...new Set(newTags)]; 
@@ -34,9 +34,9 @@ export default function Tags({ task, taskChange, setReload, allTags }) {
           )
       })}
 
-      {allTags.length > 0 && task.tags.length < 3 && (
+      {selectTags.length > 0 && task.tags.length < 3 && (
         <>
-          <TagSelect tags={allTags} tag={tag} setTag={setTag}/> 
+          <TagSelect tags={selectTags} tag={tag} setTag={setTag}/> 
             <IconButton onClick={handleTagChange}>
               <AddIcon/>         
             </IconButton>
