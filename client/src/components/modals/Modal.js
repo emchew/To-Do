@@ -75,7 +75,7 @@ export default function Modal({id, open, setOpen, hasTitle, title, hasFooter, fo
             </BootstrapDialogTitle>
         )}
        
-        <DialogContent {...dividers}>
+        <DialogContent dividers={dividers}>
             {children}
         </DialogContent>
         {hasFooter && (

@@ -1,11 +1,11 @@
 import React from 'react'
 import { styled } from '@mui/material';
 
-export default function FlexContainer({ children, sx, ...props }) {
-    console.log(sx);
+export default function FlexContainer({ children, sx, onClick, ...props }) {
     return (
         <ContainerStyle
             sx={sx}
+            onClick={onClick}
             {...props}>
             {children}
         </ContainerStyle>

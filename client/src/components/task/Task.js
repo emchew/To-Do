@@ -19,8 +19,13 @@ export default function Task({task, taskChange, taskClick, allTags, setReload}) 
     taskChange(task.taskId, task.taskName, statusOptions[value].value, task.tags, task.description);
   }
 
+  const handleClick = (e) => {
+    
+        // taskClick(task);
+  }
+
   return (
-    <FlexContainer id="task-container" onClick={() => taskClick(task)}>
+    <FlexContainer id="task-container" onClick={handleClick}>
         <StatusSelect value={status} setValue={handleStatusChange}/>
         <BlockText fontWeight={'bold'}>2pm-5pm</BlockText>
         <BlockText sx={{width: '25vw'}}>{task.taskName}</BlockText>

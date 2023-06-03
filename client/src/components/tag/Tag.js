@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import useVisible from '../../hooks/useVisible';
 import axios from 'axios';
 import { styled } from '@mui/material';
-import Popover from '@mui/material/Popover';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import EditTagForm from './EditTagForm';
@@ -10,15 +10,22 @@ const defaultColours = {
     colour: '#607D8B',
     textColour: '#FFFFFF'
 }
-export default function Tag({tagId, setReload, tagDelete}) {
+export default function Tag({tagId, setReload, reloadTags, setReloadTags, tagDelete}) {
     const [tag, setTag] = useState({});
-    const [anchor, setAnchor] = useState(null);
-    
+    const { ref, isComponentVisible, setIsComponentVisible } = useVisible(false);
     const config = {'Content-Type': 'application/json'};
+    // const [toggleTagModal, setToggleTagModal] = useState(false);
 
     useEffect(() => {
         updateTag();
     }, [tagId]);
+
+    useEffect(() => {
+        if (reloadTags) {
+            updateTag();
+            setReloadTags(false);
+        }
+    }, [reloadTags]);
     
     const updateTag = () => {
         axios.get(`/tag/details/${tagId}`, config)
@@ -31,24 +38,33 @@ export default function Tag({tagId, setReload, tagDelete}) {
         setReload(true);
     }
 
+    const handleColourChange = (colour, textColour) => {
+        const body = {tagId, ...tag, colour, textColour};
+        axios.put(`/tag/edit/`, body, config)
+            .then(res => res.data)
+            .then(() => setReloadTags(true))
+            .then(() => setReload(true))
+    }
+
+    const handleClick = (e) => {
+        // e.stopPropagation();
+        setIsComponentVisible(true);
+    }
+
     return (
         <>
-            <TagStyle tag={tag} onClick={e => setAnchor(e.currentTarget)}>
+            <TagStyle tag={tag} onClick={handleClick} Mouse>
                 {tag.tagName}
                 <CloseStyle tag={tag} onClick={handleDelete}>
                     <CloseIcon/>
                 </CloseStyle>
+                
+                {isComponentVisible && (
+                    <div ref={ref}>
+                        <EditTagForm tag={tag} colourChange={handleColourChange}/>
+                    </div>
+                )}
             </TagStyle>
-            <Popover open={anchor != null}
-                onClose={() => setAnchor(null)}
-                anchorEl={anchor}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-            >
-                <EditTagForm tag={tag}/>
-            </Popover>
         </>
     )
 }
@@ -59,7 +75,8 @@ const TagStyle = styled('div')(({tag}) => ({
     marginRight: '10px',
     borderRadius: '40px',
     minWidth: '80px',
-    textAlign: 'center'
+    textAlign: 'center',
+    position: 'relative',
 }));
 
 const CloseStyle = styled(IconButton)(({tag}) => ({

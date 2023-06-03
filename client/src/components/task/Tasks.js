@@ -29,6 +29,7 @@ export default function Tasks({ tasks, taskEdit, allTags, updateTags, setReload 
         {currentTask && (
           <Modal open={toggleTaskModal}
             setOpen={setToggleTaskModal}
+            dividers={true}
             hasTitle={true}
             title={currentTask.taskName}>
             <TaskDetails task={currentTask}/>
