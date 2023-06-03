@@ -1,5 +1,5 @@
 import { clear } from "../tests/utility";
-import { tagCreate, tagDelete, tagEdit, tagsList } from "../src/tag";
+import { tagCreate, tagDelete, tagDetails, tagEdit, tagsList } from "../src/tag";
 
 const tag = {
     tagName: "Tag",
@@ -62,6 +62,25 @@ describe("Testing tag/create", () => {
     }) 
 });
 
+describe("Testing tag/details", () => {
+    describe("Error cases", () => {
+        test("Throws error when tagId is not valid", () => {
+            expect(() => tagDetails("id")).toThrow(Error);
+        });
+    }) 
+    describe("Success Cases", () => {
+        test("Returns all details about a tag", () => {
+            const { tagId } = tagCreate(tag.tagName, tag.colour, tag.textColour);
+            expect(tagDetails(tagId)).toStrictEqual({
+                tag: {
+                    tagName: tag.tagName,
+                    colour: tag.colour,
+                    textColour: tag.textColour
+                }
+            });
+        });
+    }) 
+});
 
 describe("Testing tag/edit", () => {
     describe("Error cases", () => {

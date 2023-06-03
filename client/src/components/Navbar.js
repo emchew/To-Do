@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <header>
         <nav className="App-header">
-            <FlexContainer id="nav-container" centreVertical={true}>
+            <FlexContainer sx={{paddingLeft: '1em'}} alignItems="center">
                 <BrandLogo sx={{color: '#46bb40', fontSize: '2em'}}/>
                 <div className="nav-brand">
                     <Link to="/">

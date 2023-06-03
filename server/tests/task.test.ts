@@ -85,6 +85,21 @@ describe("Testing task/edit", () => {
         });
     })
     describe("Success cases", () => {
+        test("Editing status", () => {
+            let { taskId } = taskCreate(task.taskName, taskStatus.todo, [], task.description);
+            taskEdit(taskId, task.taskName, taskStatus.completed, [], task.description);
+            expect(tasksList()).toStrictEqual({
+                tasks: [
+                    {
+                        taskId,
+                        taskName: task.taskName,
+                        status: taskStatus.completed, 
+                        tags: [], 
+                        description: task.description,
+                    }
+                ]
+            })
+        });
         test("Adding a tag", () => {
             const { tagId } = tagCreate(tag.tagName, tag.colour, tag.textColour);
             let { taskId } = taskCreate(task.taskName, taskStatus.completed, [], task.description);

@@ -1,0 +1,52 @@
+main {
+    height: calc(100vh - 80px);
+}
+
+nav {
+    background-color: #FEFEFE;
+    border-bottom: 1px solid #aaa9a9;
+}
+
+.nav-brand {
+    margin-left: 1em;
+}
+
+#dashboard-container {
+    height: fit-content;
+    padding: 1em 0em;
+}
+
+#tasks-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(100% - 100px);
+}
+
+#task-container {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: left;
+    background-color: white;
+    cursor: pointer;
+    margin: 10px 0px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: calc(100% - 20px);
+}
+
+#main-button-container {
+    position: fixed;
+    bottom: 1em;
+    right: 0px;
+    justify-content: space-evenly;
+    width: 250px;
+}
+
+#tags-container {
+    flex-grow: 1;
+    justify-content: end;
+    align-items: center;
+}
