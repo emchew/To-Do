@@ -32,7 +32,7 @@ export default function Tasks({ tasks, taskEdit, allTags, updateTags, setReload 
             dividers={true}
             hasTitle={true}
             title={currentTask.taskName}>
-            <TaskDetails task={currentTask}/>
+            <TaskDetails task={currentTask} setReload={setReload}/>
           </Modal>
         )}
     </FlexContainer>

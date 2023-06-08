@@ -50,16 +50,18 @@ export default function Tag({tagId, setReload, tagDelete, allowDelete}) {
     }
 
     const handleNameChange = () => {
-        editTag({tagId, ...tag, tagName: editTagName});
+        if (editTagName !== "") {
+            editTag({tagId, ...tag, tagName: editTagName});
+        }
     }
 
     const handleClick = (e) => {
-        // e.stopPropagation();
+        e.stopPropagation();
         setIsComponentVisible(true);
     }
 
     return (
-        <WrapperContainer>
+        <WrapperContainer onClick={e => e.stopPropagation()}>
             {!isComponentVisible
                 ? (
                     <TagStyle justifyContent="space-evenly" tag={tag} onClick={handleClick} Mouse>

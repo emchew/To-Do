@@ -5,6 +5,7 @@ const colour = '#5C5C5C';
 export default function Select({ id, options, colour, value, setValue, ...props}) {    
     return (
         <SelectStyle id={id}
+            onClick={e => e.stopPropagation()}
             onChange={(e) => setValue(e.target.value)}
             value={value}
             color={options[value].textColour ? options[value].textColour : colour}

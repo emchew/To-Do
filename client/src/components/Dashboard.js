@@ -24,12 +24,14 @@ export default function Dashboard({reload, setReload, taskEdit}) {
             .then(res => res.data)
             .then(data => {
                 setTasks(data.tasks)
-            });
+            })
+            .catch((err) => console.log("Network error"));
     }
     const updateTags = () => {
         axios.get(`/tags/list`, config)
             .then(res => res.data)
-            .then(data => setTags(data.tags));
+            .then(data => setTags(data.tags))
+            .catch((err) => console.log("Network error"));
     }
 
     return (

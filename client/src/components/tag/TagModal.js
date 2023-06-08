@@ -20,8 +20,8 @@ export default function TagModal({open, setOpen, setReload, submit}) {
     const updateTags = () => {
         axios.get(`/tags/list`, config)
             .then(res => res.data)
-            .then(data => setTags(data.tags));
-        
+            .then(data => setTags(data.tags))
+            .catch(() => alert("Network error"));
     }
     const tagDelete = (tagId) => {
         axios.delete(`/tag/delete/${tagId}`, config)
