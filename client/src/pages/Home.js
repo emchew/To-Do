@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-// import { styled } from '@mui/material';
 
 import Button from '../components/buttons/Button';
 import Dashboard from '../components/Dashboard'
 import FlexContainer from '../containers/FlexContainer'
 import TaskModal from '../components/task/TaskModal';
+import TagModal from '../components/tag/TagModal';
 export default function Home() {
+  const [addTaskModal, setAddTaskModal] = useState(false);
   const [addTagModal, setAddTagModal] = useState(false);
   const [reload, setReload] = useState(true);
   const config = {'Content-Type': 'application/json'};
@@ -35,16 +36,18 @@ export default function Home() {
       .then(() => setReload(true));
     return false;
   }
+  
   return (
     <main>
         <Dashboard reload={reload} setReload={setReload} taskEdit={handleTaskEdit}/>
         <FlexContainer id="main-button-container">
-            <Button colour="default">Add a Tag</Button>
-            <Button colour="green" sx={newTaskBtnStyle} onClick={() => setAddTagModal(true)}>
+            <Button colour="default" onClick={() => setAddTagModal(true)}>All Tags</Button>
+            <Button colour="green" sx={newTaskBtnStyle} onClick={() => setAddTaskModal(true)}>
                 + New Task
             </Button>
         </FlexContainer>
-        <TaskModal open={addTagModal} setOpen={setAddTagModal} submit={handleTaskSubmit}/>
+        <TaskModal open={addTaskModal} setOpen={setAddTaskModal} submit={handleTaskSubmit}/>
+        <TagModal open={addTagModal} setOpen={setAddTagModal} setReload={setReload}/>
     </main>
   )
 }

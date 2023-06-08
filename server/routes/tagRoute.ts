@@ -20,6 +20,7 @@ router.put("/edit", (req, res) => {
 
 router.delete("/delete/:tagId", (req, res) => {
     const { tagId } = req.params;
+    console.log(tagId);
     return res.json(tagDelete(tagId));
 });
 

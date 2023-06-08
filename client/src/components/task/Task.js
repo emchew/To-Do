@@ -20,8 +20,9 @@ export default function Task({task, taskChange, taskClick, allTags, setReload}) 
   }
 
   const handleClick = (e) => {
-    
-        // taskClick(task);
+      if (e.currentTarget != e.target) {
+        taskClick(task);
+      }
   }
 
   return (

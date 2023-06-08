@@ -1,10 +1,17 @@
 import { clear } from "../tests/utility";
 import { tagCreate, tagDelete, tagDetails, tagEdit, tagsList } from "../src/tag";
-
+import { taskStatus } from "../src/status/status";
+import { taskCreate, tasksList } from "../src/task";
 const tag = {
     tagName: "Tag",
     colour: "#AA33FF",
     textColour: "#AA33FF"
+}
+
+const task = {
+    taskName: "New task!",
+    description: "This is a description.",
+    status: taskStatus.todo,
 }
 
 beforeEach(() => {
@@ -196,5 +203,32 @@ describe("Testing tag/delete", () => {
                 ]
             });
         });
+
+        test("Removes tag from all tasks", () => {
+            const taskName2 = "task 2";
+            const { tagId } = tagCreate(tag.tagName, tag.colour, tag.textColour);
+            const { taskId } = taskCreate(task.taskName, task.status, [tagId], task.description);
+            const taskId2 = taskCreate(taskName2, task.status, [tagId], task.description).taskId;
+            expect(() => tagDelete(tagId)).not.toThrow(Error);
+            expect(tasksList()).toStrictEqual({
+                tasks: [
+                    {
+                        taskId: taskId2,
+                        taskName: taskName2,
+                        status: task.status, 
+                        tags: [], 
+                        description: task.description,
+                    },
+                    {
+                        taskId,
+                        taskName: task.taskName,
+                        status: task.status, 
+                        tags: [], 
+                        description: task.description,
+                    }
+                ]
+            })
+        });
+
     })
 });

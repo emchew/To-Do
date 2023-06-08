@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { styled } from '@mui/material';
 
 import Button from '../buttons/Button';
 import Label from '../form/Label';
@@ -42,7 +43,7 @@ export default function TaskForm({ submit}) {
     const handleTagSubmit = () => updateTags();
 
     return (
-        <form onSubmit={e => e.preventDefault()}>
+        <StyledForm onSubmit={e => e.preventDefault()}>
             <FormGrid>
                 <Label htmlFor="new-task-name-form">Task Name</Label>
                 <TextInput id="new-task-name-form" value={name}
@@ -82,6 +83,10 @@ export default function TaskForm({ submit}) {
                     Create
                 </Button>
             </FlexContainer>
-        </form>
+        </StyledForm>
     )
 }
+
+const StyledForm = styled('form')({
+    minWidth: '300px'
+});
